@@ -2,18 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;900&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: rgb(0, 0, 0);
+  --background-start-rgb: rgb(214, 219, 220);
+  --background-end-rgb: rgb(255, 255, 255);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*{
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+
+*::-webkit-scrollbar-thumb {
+  border: 3px solid white;
+  background: gray;
+  border-radius: 8px;
+
+  transition: .2s all;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: black;
 }
 
 body {
@@ -21,7 +42,7 @@ body {
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
+      var(--background-end-rgb)
     )
-    rgb(var(--background-start-rgb));
+    var(--background-start-rgb);
 }
