@@ -29,12 +29,13 @@ export default function PokemonTabs() {
 		<motion.section 
 			className={clsx(
 				"flex-1 w-full pt-10 rounded-tl-3xl rounded-tr-3xl",
+				theme==="light" && "bg-zinc-300",
 				theme==="dark" && "bg-zinc-900",
 			)}
 		>
 			<Tabs.Root className="w-full h-full" defaultValue="About">
 
-				<Tabs.List className="flex flex-row justify-around gap-2 w-full px-4">
+				<Tabs.List className="flex flex-row justify-around gap-2 w-full px-4 relative z-50">
 					<Tabs.Trigger className={TabsTriggerStyles} value="About">
 						About
 					</Tabs.Trigger>

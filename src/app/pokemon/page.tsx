@@ -19,17 +19,7 @@ export default function PokemonPage() {
         theme === "dark" && "bg-zinc-950"
       )}
     >
-
-      <header className={clsx(
-        'z-30',
-        'm-4',
-        'text-black text-base font-bold',
-        theme === "dark" && 'text-white'
-        )}
-      >
-        #001
-      </header>
-      
+       
       <PokemonIntro/>
 
       <PokemonTabs/>
