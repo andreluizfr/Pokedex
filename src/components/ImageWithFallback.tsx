@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import fallbackImage from '../../public/vercel.svg';
+import fallbackImage from '../../public/default-fallback-image.png';
 import { useState } from 'react';
 
 interface ImageWithFallbackProps extends ImageProps{

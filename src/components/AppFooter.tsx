@@ -9,36 +9,29 @@ export default function AppFooter(){
     return(
         <footer className={clsx(
             "flex justify-center items-center",
-            "w-full border-t border-gray-300 border-opacity-50",
-            theme==="white" && "bg-white",
-            theme==="dark" && "bg-black border-opacity-0"
+            "w-full border-t border-gray-300",
+            theme==="light" && "bg-gray-200 border-opacity-100",
+            theme==="dark" && " bg-black border-opacity-25",
             )}
         >
-            <div className={clsx(
-              "relative place-items-center",
-              "p-2 sm:p-4 md:p-6 lg:p-8"
-              )}    
+          <span className={clsx(
+            "p-2 sm:p-2 md:p-4 lg:p-6",
+            "text-xs font-normal align-middle",
+            theme==="light" && "text-black",
+            theme==="dark" && "text-white",
+            )}
+          >
+            {"Made by "}
+            <a 
+              href="https://github.com/andreluizfr" 
+              target="blank" 
+              className={clsx(
+                "text-sky-600 underline decoration-sky-600 cursor-pointer",
+              )}
             >
-              <span className={clsx(
-                "inline",
-                "text-xs text-black font-normal",
-                theme==="dark" && "text-white"
-                )}
-              >
-                Made by{" "}
-                <a 
-                  href="https://github.com/andreluizfr" 
-                  target="blank" 
-                  className={clsx(
-                    "text-sky-800 underline decoration-sky-800 cursor-pointer",
-                    theme=="dark" && "text-sky-600 decoration-sky-600"
-                  )}
-                >
-                  github.com/andreluizfr
-                </a>
-              </span>
-            </div>
-            
+              github.com/andreluizfr
+            </a>
+          </span>
         </footer>
     )
 }

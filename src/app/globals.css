@@ -13,7 +13,7 @@
 *{
   scroll-behavior: smooth;
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  /*font-family: 'Outfit', sans-serif;*/
 }
 
 *::-webkit-scrollbar {

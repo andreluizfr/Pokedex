@@ -1,11 +1,18 @@
 'use client';
-import Image from 'next/image';
 import clsx from 'clsx';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
+import formatId from '@/utils/formatId';
+
 import { motion, useScroll, useSpring, useTransform} from 'framer-motion';
 
-export default function PokemonIntro() {
+import { IPokemonQueryData } from '@/queries/CustomGetPokemon';
+
+import Image from 'next/image';
+import PokemonTypeBadge from './PokemonTypeBadge';
+import PokemonAnimatedImage from './PokemonAnimatedImage';
+
+export default function PokemonIntro({data}: {data: IPokemonQueryData}) {
 
 	const theme = useContext(ThemeContext);
 
@@ -21,7 +28,7 @@ export default function PokemonIntro() {
 		const offset = -660;
 		const shift = (1-value)*720;
 		return offset + shift;
-	})
+	});
 
 	const top = useSpring(topTransformed);
 
@@ -43,12 +50,12 @@ export default function PokemonIntro() {
 			>	
 				<span className={clsx(
 					'Description',
-					'text-black text-xl font-bold',
+					'text-black text-xl font-bold capitalize',
 					"drop-shadow-[0_0_0.3rem_#00000070]",
 					theme === "dark" && 'text-white drop-shadow-[0_0_0.3rem_#ffffff70]'
 					)}
 				>
-					Bulbasaur
+					{data?.pokemon?.name}
 				</span>
 
 				<span className={clsx(
@@ -56,7 +63,7 @@ export default function PokemonIntro() {
 					theme === "dark" && 'text-white'
 					)}
 				>
-					#001
+					{formatId(String(data?.pokemon?.id), true)}
 				</span>
 			</header>
 			
@@ -67,55 +74,20 @@ export default function PokemonIntro() {
 					theme === "dark" && 'text-white'
 					)}
 				>
-					<div className={clsx(
-						'flex flex-row justify-center items-center gap-[4px]',
-						'py-[2px] px-3',
-						'border border-solid border-green-600 border-opacity-50 rounded-2xl'
-						)}
-					>
-						<Image
-							src="/grass-type.svg"
-							alt="grass type"
-							width={12}
-							height={12}
-						/>
-						<span className='text-[11px] text-green-600 font-bold'>
-							Grass
-						</span>
-					</div>
-
-					<div className={clsx(
-						'flex flex-row justify-center items-center gap-[4px]',
-						'py-[2px] px-3',
-						'border border-solid border-purple-600 border-opacity-50 rounded-2xl',
-						)}
-					>
-						<Image
-							src="/poison-type2.svg"
-							alt="grass type"
-							width={12}
-							height={12}
-						/>
-						<span className='text-[11px] text-purple-600 font-bold'>
-							Poison
-						</span>
-					</div>
+					{
+						data?.pokemon?.types?.map((type, index)=>{
+							return (
+								<PokemonTypeBadge key={index} type={type.type.name}/>
+							)
+						})
+					}
 				</div>
 			</div>
 
-			<motion.div 
-				className={clsx(
-					"relative",
-					"after:absolute after:block after:content-[''] after:left-[-1rem] after:top-0",
-					"after:w-[16rem] after:h-[13rem] after:-z-10",
-					"after:bg-[conic-gradient(#64731E,#006750,#267D39)] after:blur-2xl after:opacity-50",
-					theme==="dark" && "after:opacity-100"
-				)}
-				style={{ scale: scaleTransformed, top}}
-			>
+			<PokemonAnimatedImage type={data?.pokemon?.types?.length>0?data.pokemon.types[0].type.name:undefined} scale={scaleTransformed} top={top}>
 				<Image
-					src="/001.png"
-					alt="Bulbasaur"
+					src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(String(data.pokemon.id), false)}.png`}
+					alt={data?.pokemon?.name?data.pokemon.name:"pokemon"}
 					width={220}
 					height={220}
 					priority
@@ -123,7 +95,7 @@ export default function PokemonIntro() {
 						"relative md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px]",
 					)}
 				/>
-			</motion.div>
+			</PokemonAnimatedImage>
 			
 		</motion.section>
   );

@@ -1,4 +1,3 @@
-'use client';
 import * as Switch from '@radix-ui/react-switch';
 import clsx from 'clsx';
 import { ThemeContext } from '@/contexts/ThemeContext';
@@ -8,8 +7,9 @@ export default function ThemeSwitch({ setTheme }: { setTheme: Dispatch<SetStateA
 
   const theme = useContext(ThemeContext);
 
-  function switchTheme() {
-    if (theme === 'light') setTheme('dark');
+  function switchTheme(checked: boolean) {
+    console.log(checked);
+    if (checked) setTheme('dark');
     else setTheme('light');
   }
 
@@ -19,7 +19,7 @@ export default function ThemeSwitch({ setTheme }: { setTheme: Dispatch<SetStateA
     )}>
       <label className={clsx(
         "pr-3",
-        "text-black text-sm",
+        "text-sm text-black",
         theme==="dark" && "text-white"
       )}
         htmlFor="theme-mode"
@@ -36,6 +36,7 @@ export default function ThemeSwitch({ setTheme }: { setTheme: Dispatch<SetStateA
       )}
         id="theme-mode"
         onCheckedChange={switchTheme}
+        checked={(theme==="dark")?true:false}
       >
         <Switch.Thumb className={clsx(
           "inline-block w-5 h-5 rounded-full",

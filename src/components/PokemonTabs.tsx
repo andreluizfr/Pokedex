@@ -6,13 +6,15 @@ import clsx from 'clsx';
 import * as Tabs from '@radix-ui/react-tabs';
 import { motion } from 'framer-motion';
 
+import { IPokemonQueryData } from '@/queries/GetPokemon';
+
 import PokemonAbout from './PokemonAbout';
 import PokemonStatus from './PokemonStatus';
 import PokemonMoves from './PokemonMoves';
 import PokemonEvolutions from './PokemonEvolutions';
 import PokemonLocations from './PokemonLocations';
 
-export default function PokemonTabs() {
+export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
 
 	const theme = useContext(ThemeContext);
 
@@ -35,7 +37,7 @@ export default function PokemonTabs() {
 		>
 			<Tabs.Root className="w-full h-full" defaultValue="About">
 
-				<Tabs.List className="flex flex-row justify-around gap-2 w-full px-4 relative z-50">
+				<Tabs.List className="flex flex-row justify-around gap-2 w-full px-4 relative z-40">
 					<Tabs.Trigger className={TabsTriggerStyles} value="About">
 						About
 					</Tabs.Trigger>

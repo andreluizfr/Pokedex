@@ -13,10 +13,11 @@ export const theme = {
       'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
     },
     gridTemplateColumns: {
-      'auto-fill-50': 'repeat(auto-fill, minmax(50px, 1fr))',
-      'auto-fill-100': 'repeat(auto-fill, minmax(100px, 1fr))',
-      'auto-fill-150': 'repeat(auto-fill, minmax(150px, 1fr))',
-      'auto-fill-200': 'repeat(auto-fill, minmax(200px, 1fr))',
+      'auto-fill-50-fr': 'repeat(auto-fill, minmax(50px, auto))',
+      'auto-fill-100-fr': 'repeat(auto-fill, minmax(100px, auto))',
+      'auto-fill-150-fr': 'repeat(auto-fill, minmax(150px, auto))',
+      'auto-fill-200-fr': 'repeat(auto-fill, minmax(200px, auto))',
+
     }
   },
 };
