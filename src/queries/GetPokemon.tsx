@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
   
-export interface IPokemonQueryData{
+interface IPokemonQueryData{
     "base_happiness": number,
     "capture_rate": number,
     "flavor_text_entries": [{

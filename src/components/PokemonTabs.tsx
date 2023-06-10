@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import * as Tabs from '@radix-ui/react-tabs';
 import { motion } from 'framer-motion';
 
-import { IPokemonQueryData } from '@/queries/CustomGetPokemon';
+import { ICustomPokemonQueryData } from '@/queries/CustomGetPokemon';
 
 import PokemonAbout from './PokemonAbout';
 import PokemonStats from './PokemonStats';
@@ -14,7 +14,7 @@ import PokemonMoves from './PokemonMoves';
 import PokemonEvolutions from './PokemonEvolutions';
 import PokemonLocations from './PokemonLocations';
 
-export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
+export default function PokemonTabs({data}: {data: ICustomPokemonQueryData}) {
 
 	const theme = useContext(ThemeContext);
 
@@ -56,7 +56,11 @@ export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
 				</Tabs.List>
 
 				<Tabs.Content className="p-6 w-full h-full" value="About">
-					<PokemonAbout name={data?.pokemon.name} pokemonHeight={data?.pokemon.height} pokemonWeight={data?.pokemon.weight}/>
+					<PokemonAbout 
+						pokemonName={data?.pokemon.name} 
+						pokemonHeight={data?.pokemon.height} 
+						pokemonWeight={data?.pokemon.weight}
+					/>
 				</Tabs.Content>
 
 				<Tabs.Content className="p-6 w-full h-full" value="Stats">
@@ -68,11 +72,11 @@ export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
 				</Tabs.Content>
 						
 				<Tabs.Content className="p-6 w-full h-full" value="Evolutions">
-					<PokemonEvolutions/>
+					<PokemonEvolutions pokemonId={data?.pokemon.id}/>
 				</Tabs.Content>
 
 				<Tabs.Content className="p-6 w-full h-full" value="Locations">
-					<PokemonLocations/>
+					<PokemonLocations pokemonName={data?.pokemon.name}/>
 				</Tabs.Content>
 
 			</Tabs.Root>

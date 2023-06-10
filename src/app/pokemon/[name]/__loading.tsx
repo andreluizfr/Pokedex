@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import { DotLoader } from 'react-spinners';
 
+//usar em outro momento
 export default function LoadingPage () {
 
     const theme = useContext(ThemeContext);

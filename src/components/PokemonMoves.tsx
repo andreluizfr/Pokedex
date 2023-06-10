@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import clsx from 'clsx';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
 interface props {
@@ -40,11 +40,12 @@ export default function PokemonMoves({pokemonMoves}: props) {
 			className='h-full px-4'
 		>
 
-			<div className='flex flex-col justify-start items-start'>
+			<div className='flex flex-row justify-start items-start flex-wrap gap-2'>
 				{pokemonMoves?.map(move=>
 					<div className={clsx(
-						"text-xs text-black",
-						theme==="dark" && "text-white"
+						"bg-white p-2 rounded-md cursor-help",
+						"text-xs text-black font-semibold",
+						theme==="dark" && "bg-gray-600 text-white"
 						)}
 					>
 						{move.move.name}

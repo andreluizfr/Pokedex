@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
-export default function PokemonLocations({data}: {data: IPokemonQueryData}) {
+export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 
 	const theme = useContext(ThemeContext);
 

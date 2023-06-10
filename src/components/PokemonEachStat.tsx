@@ -29,8 +29,8 @@ export default function PokemonEachStat ({name, value}: IPokemonEachStat){
             <span className={clsx(
                 "w-20",
                 "text-sm",
-                theme==="light" && "text-gray-500",
-                theme==="dark" && "text-gray-600"
+                theme==="light" && "text-gray-600",
+                theme==="dark" && "text-gray-500"
                 )}
             >
                 {name}
@@ -41,7 +41,7 @@ export default function PokemonEachStat ({name, value}: IPokemonEachStat){
                     className={clsx(
                         "absolute top-[-4px]",
                         "w-full h-2 rounded-md",
-                        "bg-slate-500",
+                        theme==="light" && "bg-slate-200",
                         theme==="dark" && "bg-slate-600",
                     )}
                 />

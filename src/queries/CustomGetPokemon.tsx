@@ -1,7 +1,7 @@
 'use client'; 
 import { gql, useQuery } from '@apollo/client';
 
-export interface IPokemonQueryData{
+export interface ICustomPokemonQueryData{
     pokemon: {
         message: string,
         id: number,
