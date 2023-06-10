@@ -27,7 +27,7 @@ export interface IPokemonQueryData{
             stat: {        
                 name: string
             }      
-            base_stat: string    
+            base_stat: number   
         }]
     }
 }

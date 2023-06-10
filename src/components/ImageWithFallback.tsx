@@ -1,8 +1,6 @@
-import Image, { ImageProps } from 'next/image';
 import fallbackImage from '../../public/default-fallback-image.png';
-import { useState } from 'react';
-
-interface ImageWithFallbackProps extends ImageProps{
+import { ImgHTMLAttributes, useState } from 'react';
+interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement>{
 }
 
 const ImageWithFallback = ({src, alt, ...props}: ImageWithFallbackProps) => {
@@ -10,9 +8,9 @@ const ImageWithFallback = ({src, alt, ...props}: ImageWithFallbackProps) => {
   const [error, setError] = useState(false);
 
   return ( 
-    <Image
+    <img
       alt={alt}
-      src={error ? fallbackImage : src}
+      src={error ? (fallbackImage as unknown as string) : src as unknown as string}
       onError={()=>setError(true)}
       {...props}
     />

@@ -7,12 +7,15 @@ import AppHeader from '@/components/AppHeader';
 import AppFooter from '@/components/AppFooter';
 import { useEffect, useState } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.vercel.app/api/graphql',
   cache: new InMemoryCache(),
 });
+
+const queryClient = new QueryClient({});
 
 export default function RootLayout({
   children,
@@ -56,11 +59,13 @@ export default function RootLayout({
         )}
       >
         <ApolloProvider client={client}>
-          <ThemeContext.Provider value={theme}>
-            <AppHeader setTheme={setTheme}/>
-            {children}
-            <AppFooter/>
-          </ThemeContext.Provider>
+          <QueryClientProvider client={queryClient}>
+            <ThemeContext.Provider value={theme}>
+              <AppHeader setTheme={setTheme}/>
+              {children}
+              <AppFooter/>
+            </ThemeContext.Provider>
+          </QueryClientProvider>
         </ApolloProvider>
       </body>
     </html>

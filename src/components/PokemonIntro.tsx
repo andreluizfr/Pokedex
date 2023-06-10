@@ -51,8 +51,7 @@ export default function PokemonIntro({data}: {data: IPokemonQueryData}) {
 				<span className={clsx(
 					'Description',
 					'text-black text-xl font-bold capitalize',
-					"drop-shadow-[0_0_0.3rem_#00000070]",
-					theme === "dark" && 'text-white drop-shadow-[0_0_0.3rem_#ffffff70]'
+					theme === "dark" && 'text-white'
 					)}
 				>
 					{data?.pokemon?.name}

@@ -6,10 +6,10 @@ import clsx from 'clsx';
 import * as Tabs from '@radix-ui/react-tabs';
 import { motion } from 'framer-motion';
 
-import { IPokemonQueryData } from '@/queries/GetPokemon';
+import { IPokemonQueryData } from '@/queries/CustomGetPokemon';
 
 import PokemonAbout from './PokemonAbout';
-import PokemonStatus from './PokemonStatus';
+import PokemonStats from './PokemonStats';
 import PokemonMoves from './PokemonMoves';
 import PokemonEvolutions from './PokemonEvolutions';
 import PokemonLocations from './PokemonLocations';
@@ -41,8 +41,8 @@ export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
 					<Tabs.Trigger className={TabsTriggerStyles} value="About">
 						About
 					</Tabs.Trigger>
-					<Tabs.Trigger className={TabsTriggerStyles} value="Status">
-						Status
+					<Tabs.Trigger className={TabsTriggerStyles} value="Stats">
+						Stats
 					</Tabs.Trigger>
 					<Tabs.Trigger className={TabsTriggerStyles} value="Moves">
 						Moves
@@ -55,23 +55,23 @@ export default function PokemonTabs({data}: {data: IPokemonQueryData}) {
 					</Tabs.Trigger>
 				</Tabs.List>
 
-				<Tabs.Content className="p-4 w-full h-full" value="About">
-					<PokemonAbout/>
+				<Tabs.Content className="p-6 w-full h-full" value="About">
+					<PokemonAbout name={data?.pokemon.name} pokemonHeight={data?.pokemon.height} pokemonWeight={data?.pokemon.weight}/>
 				</Tabs.Content>
 
-				<Tabs.Content className="p-4 w-full h-full" value="Status">
-					<PokemonStatus/>
+				<Tabs.Content className="p-6 w-full h-full" value="Stats">
+					<PokemonStats pokemonStats={data?.pokemon.stats}/>
 				</Tabs.Content>
 
-				<Tabs.Content className="p-4 w-full h-full" value="Moves">
-					<PokemonMoves/>
+				<Tabs.Content className="p-6 w-full h-full" value="Moves">
+					<PokemonMoves pokemonMoves={data?.pokemon.moves}/>
 				</Tabs.Content>
 						
-				<Tabs.Content className="p-4 w-full h-full" value="Evolutions">
+				<Tabs.Content className="p-6 w-full h-full" value="Evolutions">
 					<PokemonEvolutions/>
 				</Tabs.Content>
 
-				<Tabs.Content className="p-4 w-full h-full" value="Locations">
+				<Tabs.Content className="p-6 w-full h-full" value="Locations">
 					<PokemonLocations/>
 				</Tabs.Content>
 

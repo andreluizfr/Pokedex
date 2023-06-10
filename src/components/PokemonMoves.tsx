@@ -5,7 +5,15 @@ import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
-export default function PokemonMoves() {
+interface props {
+	pokemonMoves: [{
+		move: {
+			name: string
+		}
+	}]
+}
+
+export default function PokemonMoves({pokemonMoves}: props) {
 
 	const theme = useContext(ThemeContext);
 
@@ -29,33 +37,21 @@ export default function PokemonMoves() {
 				{y: 0, opacity: 1, transition:{type: "spring", bounce: 0.2, duration: 0.8}}
 			}
 			viewport={{ once: true, amount: 0.8 }}
+			className='h-full px-4'
 		>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
+
+			<div className='flex flex-col justify-start items-start'>
+				{pokemonMoves?.map(move=>
+					<div className={clsx(
+						"text-xs text-black",
+						theme==="dark" && "text-white"
+						)}
+					>
+						{move.move.name}
+					</div>
+				)}
+			</div>
+
 		</motion.article>
 	);
 }

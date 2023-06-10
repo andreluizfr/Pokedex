@@ -7,10 +7,7 @@ import LoadingQuery from '@/components/LoadingQuery';
 import PokemonTabs from '@/components/PokemonTabs';
 import PokemonIntro from '@/components/PokemonIntro';
 
-//import { GetPokemon } from "@/queries/GetPokemon";
 import { CustomGetPokemon } from '@/queries/CustomGetPokemon';
-
-
 
 export default function PokemonPage() {
 

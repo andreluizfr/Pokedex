@@ -23,7 +23,8 @@ export default function AppHeader({setTheme}: {setTheme: Dispatch<SetStateAction
               className={clsx(
                 'mx-5',
                 'font-mono font-bold text-lg text-black',
-                theme==="dark" && 'text-white'
+					      theme==="light" && 'text-black drop-shadow-[0_0_0.3rem_#00000070]',
+                theme==="dark" && 'text-white drop-shadow-[0_0_0.3rem_#ffffff70]'
               )}
             >
               Pokedex

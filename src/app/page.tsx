@@ -6,15 +6,20 @@ import { ThemeContext } from "@/contexts/ThemeContext";
 
 import { GetPokemons, IPokemonsQueryData } from "@/queries/GetPokemons";
 
-import ImageWithFallback from "@/components/ImageWithFallback";
+import ImageWithFallback from "../components/ImageWithFallback";
 import LoadingQuery from '@/components/LoadingQuery';
+import PokemonsPageLoading from '@/components/PokemonsPageLoading';
 
 import ColorThief from 'colorthief';
 
+const MAX_IMAGES_LOADED = 36;
 
-export default function PokemonPage (){
+export default function PokemonsPage (){
 
     const theme = useContext(ThemeContext);
+
+    const [imagesLoaded, setImagesLoaded] = useState(0);
+    const [isLoadingImages, setIsLoadingImages] = useState(true);
 
     const paginationIndexStyle = clsx(
       "text-[10px] text-black font-semibold",
@@ -49,6 +54,29 @@ export default function PokemonPage (){
         } 
     }, [GetPokemonsQuery.data]);
 
+    useEffect(() => {
+      const loadImage = (imageSrc: string) => {
+        const image = new Image();
+        image.onload = () => {
+          setImagesLoaded(current=>current+1);
+        };
+        image.src = imageSrc;
+      };
+      
+      if (pokemons) {
+        pokemons.forEach((pokemon) => {
+          loadImage(pokemon.image);
+        });
+      }
+    }, [pokemons]);
+
+    useEffect(() => {
+      console.log(imagesLoaded)
+      if (imagesLoaded === MAX_IMAGES_LOADED) {
+        setIsLoadingImages(false);
+      }
+    }, [imagesLoaded]);
+
     function catchPredominantColor(event: SyntheticEvent<HTMLImageElement, Event>){
         const pokemonImage = event.target as HTMLImageElement;
         const pokemonCard = pokemonImage.parentElement;
@@ -79,6 +107,8 @@ export default function PokemonPage (){
         </main>
     );
 
+    if(isLoadingImages) return <PokemonsPageLoading/>
+
     return(
         <main className={clsx(
             "relative flex flex-1 flex-col items-center flex-start gap-1",
@@ -101,7 +131,8 @@ export default function PokemonPage (){
                       >
                         <article className={clsx(
                             "flex flex-col justify-start items-center relative z-30",
-                            "px-2 py-1 h-20 rounded-md drop-shadow-lg",
+                            "px-2 py-1 h-20 rounded-sm drop-shadow-lg",
+                            "hover:scale-[1.05] transition-transform"
                             )}
                         >
                             <img
@@ -123,9 +154,8 @@ export default function PokemonPage (){
                             <ImageWithFallback
                                 src={result.image}
                                 alt={result.name}
-                                width={256}
-                                height={256}
-                                className="h-full w-auto z-30"     
+                                className="h-[60px] w-auto z-30"     
+                                crossOrigin = "anonymous"
                                 onLoad={(e)=>catchPredominantColor(e)}                 
                             />
                         </article>

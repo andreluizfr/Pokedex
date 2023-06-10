@@ -1,11 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import clsx from 'clsx';
 
 import { motion, Variants } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+import { GetPokemon } from '@/queries/GetPokemon';
 
-export default function PokemonAbout() {
+interface props {
+	name: string | undefined,
+	pokemonHeight: number | undefined,
+	pokemonWeight: number | undefined,
+}
+
+export default function PokemonAbout({name, pokemonHeight, pokemonWeight}: props) {
 
 	const theme = useContext(ThemeContext);
 
@@ -15,6 +22,13 @@ export default function PokemonAbout() {
 	const smallScreen = useMediaQuery({
 		query: '(max-width: 768px)'
 	});
+
+	const {isLoading, data, isError, error} = GetPokemon(name);
+
+	useEffect(()=>{
+		if(data)
+			console.log(data);
+	}, [data]);
 
 	return (
 		<motion.article
@@ -28,34 +42,28 @@ export default function PokemonAbout() {
 				:
 				{y: 0, opacity: 1, transition:{type: "spring", bounce: 0.2, duration: 0.8}}
 			}
-			className='h-full'
-		>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
+			className='h-full px-4'
+		>	
+
+			<div className='flex flex-col justify-start items-start'>
+				<div className={clsx(
+					"text-xs text-black",
+					theme==="dark" && "text-white"
+					)}
+				>
+					<span className='text-gray-500 font-bold'>Height: </span>
+					{(pokemonHeight!==undefined) && pokemonHeight/10}m
+				</div>
+				<div className={clsx(
+					"text-xs text-white",
+					theme==="dark" && "text-white"
+					)}
+				>
+					<span className='text-gray-500 font-bold'>Weight: </span>
+					{pokemonWeight}lbs
+				</div>
+			</div>
+			
 		</motion.article>
 	);
 }
