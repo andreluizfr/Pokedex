@@ -51,6 +51,7 @@ export default function PokemonsPage (){
           console.log(GetPokemonsQuery.data);
           const data = GetPokemonsQuery.data as IPokemonsQueryData;
           setPokemons(data.pokemons.results);
+          setIsLoadingImages(true);
         } 
     }, [GetPokemonsQuery.data]);
 
@@ -74,6 +75,7 @@ export default function PokemonsPage (){
       console.log(imagesLoaded)
       if (imagesLoaded === MAX_IMAGES_LOADED) {
         setIsLoadingImages(false);
+        setImagesLoaded(0);
       }
     }, [imagesLoaded]);
 

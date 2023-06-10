@@ -13,7 +13,7 @@ export default function PokemonsPageLoading (){
         <SkeletonTheme baseColor="#414141" highlightColor="#626262">
             <main className={clsx(
                 "relative flex flex-1 flex-col items-center flex-start gap-1",
-                "w-full h-full p-4",
+                "w-full h-full pt-[12px] pb-4 px-4",
                 "sm:px-24 md:px-44 lg:px-60",
                 theme === "dark" && "bg-zinc-950"
                 )}
@@ -31,13 +31,13 @@ export default function PokemonsPageLoading (){
                                 "lg:min-w-[150px]",
                                 )}
                             >   
-                                <Skeleton className="h-full" count={2}/>
+                                <Skeleton className="h-full"/>
                             </article>
                         )
                     })}
                 </section>
 
-                <div className="h-3 w-40">
+                <div className="h-3 w-40 m-4">
                     <Skeleton className="h-full"/> 
                 </div>
 
