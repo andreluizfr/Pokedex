@@ -27,7 +27,7 @@ export default function PokemonsPageLoading (){
                     {(new Array(36)).fill(36).map(result=>{
                         return (
                             <article className={clsx(
-                                "h-20 min-w-[100px] z-30 rounded-sm drop-shadow-lg",
+                                "h-[90px] min-w-[100px] z-30 rounded-sm drop-shadow-lg",
                                 "lg:min-w-[150px]",
                                 )}
                             >   

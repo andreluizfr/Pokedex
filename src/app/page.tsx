@@ -19,7 +19,7 @@ export default function PokemonsPage (){
     const theme = useContext(ThemeContext);
 
     const [imagesLoaded, setImagesLoaded] = useState(0);
-    const [isLoadingImages, setIsLoadingImages] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const paginationIndexStyle = clsx(
       "text-[10px] text-black font-semibold",
@@ -43,15 +43,16 @@ export default function PokemonsPage (){
     const GetPokemonsQuery = GetPokemons(36, (page-1)*36); //(limit, offset)
 
     useEffect(()=>{
-      GetPokemonsQuery.refetch();
-    }, [page]);
+      setIsLoading(true);
+      if(isLoading)
+        GetPokemonsQuery.refetch();
+    }, [page, isLoading]);
 
     useEffect(()=>{
         if(GetPokemonsQuery.data){
           console.log(GetPokemonsQuery.data);
           const data = GetPokemonsQuery.data as IPokemonsQueryData;
           setPokemons(data.pokemons.results);
-          setIsLoadingImages(true);
         } 
     }, [GetPokemonsQuery.data]);
 
@@ -72,9 +73,13 @@ export default function PokemonsPage (){
     }, [pokemons]);
 
     useEffect(() => {
-      console.log(imagesLoaded)
-      if (imagesLoaded === MAX_IMAGES_LOADED) {
-        setIsLoadingImages(false);
+      console.log("imagens carregadas...", imagesLoaded);
+      if (page<36 && imagesLoaded === MAX_IMAGES_LOADED) {
+        setIsLoading(false);
+        setImagesLoaded(0);
+      }
+      else {
+        setIsLoading(false);
         setImagesLoaded(0);
       }
     }, [imagesLoaded]);
@@ -109,7 +114,7 @@ export default function PokemonsPage (){
         </main>
     );
 
-    if(isLoadingImages) return <PokemonsPageLoading/>
+    if(isLoading) return <PokemonsPageLoading/>
 
     return(
         <main className={clsx(
@@ -132,8 +137,8 @@ export default function PokemonsPage (){
                         key={result.name}
                       >
                         <article className={clsx(
-                            "flex flex-col justify-start items-center relative z-30",
-                            "px-2 py-1 h-20 rounded-sm drop-shadow-lg",
+                            "flex flex-col justify-start items-center gap-1 relative z-30",
+                            "px-2 py-1 h-[90px] rounded-sm drop-shadow-lg",
                             "hover:scale-[1.05] transition-transform"
                             )}
                         >
@@ -144,11 +149,12 @@ export default function PokemonsPage (){
                                     "invert opacity-20"
                                 )}
                             />
-                        
+
                             <span className={clsx(
-                                "text-white text-[10px] font-semibold capitalize break-words",
-                                "z-30",
+                                "text-white text-[12px] font-extrabold capitalize text-center align-middle float-top",
+                                "max-w-[90px] w-full overflow-hidden text-ellipsis whitespace-nowrap px-1 z-50",
                                 )}
+                                style={{WebkitTextStroke:"0.8px #000"}}
                             >
                                 {result.name}
                             </span>
