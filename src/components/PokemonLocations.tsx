@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import clsx from 'clsx';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+
+import { GetPokemon } from '@/queries/GetPokemon';
 
 export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 
@@ -15,6 +17,13 @@ export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 	const smallScreen = useMediaQuery({
 		query: '(max-width: 768px)'
 	});
+
+	const {isLoading, data, isError, error} = GetPokemon(pokemonName);
+
+	useEffect(()=>{
+		if(data)
+			console.log(data);
+	}, [data]);
 
 	return (
 		<motion.article
@@ -29,33 +38,18 @@ export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 				{y: 0, opacity: 1, transition:{type: "spring", bounce: 0.2, duration: 0.8}}
 			}
 			viewport={{ once: true, amount: 0.8 }}
+			className='h-full px-4'
 		>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
-			<div>Teste</div>
+			<div className='flex flex-col justify-start items-start'>
+				<div className={clsx(
+					"text-xs text-black font-semibold",
+					theme==="dark" && "text-white"
+					)}
+				>
+					<span className='text-gray-500 font-bold'>Habitat: </span>
+					{data?.habitat.name}
+				</div>
+			</div>
 		</motion.article>
 	);
 }

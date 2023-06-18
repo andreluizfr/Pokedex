@@ -1,10 +1,14 @@
-import { useContext, useEffect } from 'react';
-import { ThemeContext } from '@/contexts/ThemeContext';
 import clsx from 'clsx';
-
-import { motion, Variants } from 'framer-motion';
+import { ThemeContext } from '@/contexts/ThemeContext';
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+
+import { useContext, useEffect } from 'react';
 import { GetPokemon } from '@/queries/GetPokemon';
+
+
 
 interface props {
 	pokemonName: string | undefined,
@@ -30,21 +34,62 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 			console.log(data);
 	}, [data]);
 
+	if(isError)
+		return <div className='w-full px-4 text-center text-lg text-red-600'>An error occurred in the application.</div>
+
+	if(isLoading)
+		return (
+			<SkeletonTheme baseColor="#414141" highlightColor="#626262">
+				<article className='h-full px-4'>	
+	
+					<div className='flex flex-col justify-start items-start gap-2'>
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] min-w-[100px]">
+							<Skeleton className="h-full"/>
+						</div>
+						
+						<div className='flex flex-col justify-center items-center gap-4 mt-4 w-full'>
+						{(new Array(10)).fill(0).map((value, index)=>{
+								return(
+									<div className="h-[16px] min-w-full" key={"flavor-text-"+index}>
+										<Skeleton className="h-full"/>
+									</div>
+								)
+						})}
+						</div>
+		
+					</div>
+				
+				</article>
+			</SkeletonTheme>
+		);
+						
 	return (
-		<motion.article
-			initial={smallScreen?
-				{ x: -width, opacity: 0}
-				:
-				{y: height, opacity: 0}
-			}
-			animate={smallScreen?
-				{x: 0, opacity: 1, transition:{type: "spring", bounce: 0.2, duration: 0.8}}
-				:
-				{y: 0, opacity: 1, transition:{type: "spring", bounce: 0.2, duration: 0.8}}
-			}
+		<article
 			className='h-full px-4'
 		>	
-
 			<div className='flex flex-col justify-start items-start'>
 				<div className={clsx(
 					"text-xs text-black font-semibold",
@@ -132,6 +177,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 
 			</div>
 			
-		</motion.article>
+		</article>
 	);
+	
 }

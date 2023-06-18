@@ -115,8 +115,8 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 			<div className='flex flex-col justify-start items-center mt-4'>
 				{evolutionsList.length>0 && evolutionsList.map((evolution, index)=>{
 					return (
-						<>
-							<div className='flex flex-col justify-start items-start' key={"evolution-"+index}>
+						<div className='flex flex-col justify-start items-center' key={"evolution-"+index}>
+							<div className='flex flex-col justify-start items-center'>
 								<span className={clsx(
 									'text-black text-xs font-semibold',
 									theme === "dark" && "text-white"
@@ -139,7 +139,7 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 								width={20} 
 								height={20}
 							/>
-						</>
+						</div>
 					)
 				})}
 				

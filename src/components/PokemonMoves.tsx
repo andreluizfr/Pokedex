@@ -43,8 +43,9 @@ export default function PokemonMoves({pokemonMoves}: props) {
 			<div className='flex flex-row justify-start items-start flex-wrap gap-2'>
 				{pokemonMoves?.map(move=>
 					<div className={clsx(
-						"bg-white p-2 rounded-md cursor-help",
-						"text-xs text-black font-semibold",
+						"p-2 rounded-md cursor-help",
+						"text-xs font-semibold",
+						theme==="light" && "bg-white text-black",
 						theme==="dark" && "bg-gray-600 text-white"
 						)}
 					>
