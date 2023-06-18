@@ -10,7 +10,8 @@ export default function AppFooter(){
         >
           <span className={clsx(
             "p-2 sm:p-2 md:p-3 lg:p-4",
-            "text-white first-line:text-xs font-normal align-middle",
+            "text-white text-[12px] font-normal align-middle",
+            "lg:text-[16px]"
             )}
           >
             {"Made by "}

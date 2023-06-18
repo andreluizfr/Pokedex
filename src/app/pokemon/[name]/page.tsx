@@ -38,6 +38,7 @@ export default function PokemonPage() {
         )}
       >
         <div className="flex-1 flex items-center justify-center">
+          <div className='w-full px-4 text-center text-[18px] lg:text-[24px] text-red-600'>An error occurred in the application.</div>
           {JSON.stringify(error)}
         </div>
       </main>

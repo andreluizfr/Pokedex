@@ -22,13 +22,13 @@ export default function PokemonsPage (){
     const [isLoading, setIsLoading] = useState(true);
 
     const paginationIndexStyle = clsx(
-      "text-[10px] text-black font-semibold",
+      "text-[12px] lg:text-[16px] text-black font-semibold",
       "hover:opacity-70 cursor-pointer",
       theme==="dark" && "text-white"
     );
 
     const paginationPointsStyle = clsx(
-      "text-[10px] text-black font-semibold",
+      "text-[12px] lg:text-[16px] text-black font-semibold",
       theme==="dark" && "text-white"
     );
     
@@ -43,10 +43,9 @@ export default function PokemonsPage (){
     const GetPokemonsQuery = GetPokemons(36, (page-1)*36); //(limit, offset)
 
     useEffect(()=>{
-      setIsLoading(true);
       if(isLoading)
         GetPokemonsQuery.refetch();
-    }, [page, isLoading]);
+    }, [isLoading, page]);
 
     useEffect(()=>{
         if(GetPokemonsQuery.data){
@@ -78,7 +77,7 @@ export default function PokemonsPage (){
         setIsLoading(false);
         setImagesLoaded(0);
       }
-      else {
+      else if(page === 36){
         setIsLoading(false);
         setImagesLoaded(0);
       }
@@ -139,20 +138,22 @@ export default function PokemonsPage (){
                         <article className={clsx(
                             "flex flex-col justify-start items-center gap-1 relative z-30",
                             "px-2 py-1 h-[90px] rounded-sm drop-shadow-lg",
-                            "hover:scale-[1.05] transition-transform"
+                            "hover:scale-[1.05] transition-transform",
+                            "lg:h-[144px]"
                             )}
                         >
                             <img
                                 src="/pokeball.svg"
                                 className={clsx(
                                     "absolute top-0 right-0 z-10 w-3/5 h-3/5",
-                                    "invert opacity-20"
+                                    "invert opacity-20",
                                 )}
                             />
 
                             <span className={clsx(
-                                "text-white text-[12px] font-extrabold capitalize text-center align-middle float-top",
+                                "text-white text-[12px] lg:text-[16px] font-extrabold capitalize text-center align-middle float-top",
                                 "max-w-[90px] w-full overflow-hidden text-ellipsis whitespace-nowrap px-1 z-50",
+                                "lg:max-w-[120px]"
                                 )}
                                 style={{WebkitTextStroke:"0.8px #000"}}
                             >
@@ -162,7 +163,10 @@ export default function PokemonsPage (){
                             <ImageWithFallback
                                 src={result.image}
                                 alt={result.name}
-                                className="h-[60px] w-auto z-30"     
+                                className={clsx(
+                                  "h-[60px] w-auto z-30 lg",
+                                  "lg:h-[96px]",
+                                  )}   
                                 crossOrigin = "anonymous"
                                 onLoad={(e)=>catchPredominantColor(e)}                 
                             />
@@ -176,29 +180,29 @@ export default function PokemonsPage (){
           </section>
 
           <div className="flex justify-center items-center gap-2 p-4">
-            <span className={paginationIndexStyle} onClick={()=>setPage(actualPage=>actualPage-1)}>{"<<"}</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(actualPage=>actualPage-1); setIsLoading(true);}}>{"<<"}</span>
             {page>2 &&
-            <span className={paginationIndexStyle} onClick={()=>setPage(1)}>1</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(1); setIsLoading(true);}}>1</span>
             }
             {page>3 &&
             <span className={paginationPointsStyle}>...</span>
             }
 
             {page>1 &&
-            <span className={paginationIndexStyle} onClick={()=>setPage(page-1)}>{page-1}</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(page-1); setIsLoading(true);}}>{page-1}</span>
             }
-            <span className="cursor-pointer text-sky-600 text-[10px] font-bold hover:opacity-70">{page}</span>
+            <span className="cursor-pointer text-sky-600 text-[12px] lg:text-[16px] font-bold hover:opacity-70">{page}</span>
             {page<36 &&
-            <span className={paginationIndexStyle} onClick={()=>setPage(page+1)}>{page+1}</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(page+1); setIsLoading(true);}}>{page+1}</span>
             }
 
             {page<34 &&
             <span className={paginationPointsStyle}>...</span>
             }
             {page<35 &&
-            <span className={paginationIndexStyle} onClick={()=>setPage(36)}>36</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(36); setIsLoading(true);}}>36</span>
             }
-            <span className={paginationIndexStyle} onClick={()=>setPage(actualPage=>actualPage+1)}>{">>"}</span>
+            <span className={paginationIndexStyle} onClick={()=>{setPage(actualPage=>actualPage+1); setIsLoading(true);}}>{">>"}</span>
           </div>
 
         </main>

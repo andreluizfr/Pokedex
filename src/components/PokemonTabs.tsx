@@ -19,10 +19,11 @@ export default function PokemonTabs({data}: {data: ICustomPokemonQueryData}) {
 	const theme = useContext(ThemeContext);
 
 	const TabsTriggerStyles = clsx(
-		"text-black text-sm cursor-pointer active:font-bold",
+		"text-black text-[14px] cursor-pointer active:font-bold",
+		"lg:text-[18px]",
 		"after:content-[''] after:block after:relative after:top-[.2rem] after:left-0 after:h-[3px] after:w-0",
 		"after:bg-black after:rounded-full",
-		"after:transition-all after:duration-500 after:invisible ",
+		"after:transition-all after:duration-500 after:invisible",
 		"active:after:visible active:after:w-full active:after:px-0",
 		theme === "dark" && "text-white active:after:bg-white"
 	);

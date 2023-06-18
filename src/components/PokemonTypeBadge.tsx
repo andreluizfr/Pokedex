@@ -31,13 +31,14 @@ export default function PokemonTypeBadge({type}: {type: string}){
             )}
         >
             <Image
-                src={`/${type}-type.svg`}
+                src={`/types/${type}.svg`}
                 alt={`${type} type`}
                 width={12}
                 height={12}
             />
             <span className={clsx(
                 'text-[11px] font-bold capitalize',
+                'lg:text-[15px]',
                 type==="normal" && "text-orange-300",
                 type==="fighting" && "text-red-600",
                 type==="flying" && "text-violet-500",

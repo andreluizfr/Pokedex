@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import clsx from 'clsx';
-import { MotionValue, animate, motion, useMotionValue, useTransform } from 'framer-motion';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 
 
 interface IPokemonEachStat{
@@ -28,7 +28,7 @@ export default function PokemonEachStat ({name, value}: IPokemonEachStat){
 
             <span className={clsx(
                 "w-20",
-                "text-sm",
+                "text-[14px] lg:text-[18px]",
                 theme==="light" && "text-gray-600",
                 theme==="dark" && "text-gray-500"
                 )}
@@ -49,7 +49,7 @@ export default function PokemonEachStat ({name, value}: IPokemonEachStat){
                     style={{width:`${(roundedHooked/200)*100}%`}}
                     className={clsx(
                         "absolute top-[-4px]",
-                        "h-2 rounded-md",
+                        "h-2 lg:h-3 rounded-md",
                         roundedHooked<=50 && theme==="light" && " bg-red-700",
                         roundedHooked<=50 && theme==="dark" && " bg-red-500",
                         roundedHooked>50 && roundedHooked<100 && theme==="light" && " bg-orange-600",
@@ -64,7 +64,7 @@ export default function PokemonEachStat ({name, value}: IPokemonEachStat){
 
             <motion.span
                 className={clsx(
-                    "text-sm text-black",
+                    "text-[12px] lg:text-[16px] text-black",
                     theme==="dark" && "text-white",
                 )}
             >

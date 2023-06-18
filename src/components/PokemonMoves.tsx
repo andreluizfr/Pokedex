@@ -44,7 +44,7 @@ export default function PokemonMoves({pokemonMoves}: props) {
 				{pokemonMoves?.map(move=>
 					<div className={clsx(
 						"p-2 rounded-md cursor-help",
-						"text-xs font-semibold",
+						"text-[12px] lg:text-[16px] font-semibold",
 						theme==="light" && "bg-white text-black",
 						theme==="dark" && "bg-gray-600 text-white"
 						)}

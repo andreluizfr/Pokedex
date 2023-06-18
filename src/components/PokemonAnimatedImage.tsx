@@ -3,7 +3,6 @@ import { motion, MotionValue} from 'framer-motion';
 import { useContext } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 
-
 interface props extends React.HTMLAttributes<HTMLElement>{
     type: string | undefined,
     scale: MotionValue<number>,
@@ -13,7 +12,6 @@ interface props extends React.HTMLAttributes<HTMLElement>{
 export default function PokemonAnimatedImage ({type, scale, top, children}: props) {
 
 	const theme = useContext(ThemeContext);
-
 
     return (
         <motion.div 

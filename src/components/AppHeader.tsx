@@ -22,7 +22,8 @@ export default function AppHeader({setTheme}: {setTheme: Dispatch<SetStateAction
               href="/" 
               className={clsx(
                 'mx-5',
-                'font-mono font-bold text-lg text-black',
+                'font-mono font-bold text-[18px] text-black',
+                'lg:text-[24px]',
 					      theme==="light" && 'text-black drop-shadow-[0_0_0.3rem_#00000070]',
                 theme==="dark" && 'text-white drop-shadow-[0_0_0.3rem_#ffffff70]'
               )}

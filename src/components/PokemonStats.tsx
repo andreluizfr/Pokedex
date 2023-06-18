@@ -1,8 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '@/contexts/ThemeContext';
-import clsx from 'clsx';
-
-import { animate, motion, useMotionValue, useTransform, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PokemonEachStat from './PokemonEachStat';
 
 import { useMediaQuery } from 'react-responsive';
@@ -18,7 +14,6 @@ interface props {
 
 export default function PokemonStats({pokemonStats}: props) {
 
-	const theme = useContext(ThemeContext);
 	const height = window.innerHeight;
 	const width = window.innerWidth;
 

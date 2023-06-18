@@ -37,6 +37,10 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 		query: '(max-width: 768px)'
 	});
 
+	const largeScreen = useMediaQuery({
+		query: '(min-width: 1024px)'
+	});
+
 	const theme = useContext(ThemeContext);
 
 	const [chain, setChain] = useState<undefined | chain>(undefined);
@@ -49,10 +53,12 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 		name: string
 	}[]);
 
+	const [isError, setIsError] = useState(false);
+
 	useEffect(()=>{
 		axios.get("https://pokeapi.co/api/v2/evolution-chain/"+pokemonId+"/").then(response=>{
 			setChain(response.data.chain);
-		});
+		}).catch(e=>setIsError(true));
 	}, []);
 
 	useEffect(()=>{
@@ -97,6 +103,17 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 		console.log(evolutionsList);
 	}, [evolutionsList]);
 
+	if(isError)
+		return (
+			<article>	
+				<div className='flex flex-col justify-start items-center'>
+					<div className='w-full px-4 text-center text-[18px] lg:text-[24px] text-red-600'>
+						An error occurred while fetching this info in the application.
+					</div>
+				</div>
+			</article>
+		);
+
 	return (
 		<motion.article
 			initial={smallScreen?
@@ -118,27 +135,38 @@ export default function PokemonEvolutions({pokemonId}: {pokemonId: number}) {
 						<div className='flex flex-col justify-start items-center' key={"evolution-"+index}>
 							<div className='flex flex-col justify-start items-center'>
 								<span className={clsx(
-									'text-black text-xs font-semibold',
+									'text-black text-[16px] lg:text-[20px] font-semibold',
 									theme === "dark" && "text-white"
 									)}
 								>
 									<span className='text-gray-500'>Name: </span>{evolution.name}
 								</span>
 								<span className={clsx(
-									'text-black text-xs font-semibold',
+									'text-black text-[14px] lg:text-[18px] font-semibold',
 									theme === "dark" && "text-white"
 									)}
 								>
 									<span className='text-gray-500'>Minimum level: </span>{evolution.min_level}
 								</span>
 							</div>
-							<img 
-								className={theme==="dark"?"invert my-2":"my-2"}
-								src="/arrow-down.png" 
-								alt="arrow down icon" 
-								width={20} 
-								height={20}
-							/>
+
+							{largeScreen?
+								<img 
+									className={theme==="dark"?"invert my-2":"my-2"}
+									src="/arrow-down.png" 
+									alt="arrow down icon" 
+									width={26} 
+									height={26}
+								/>
+								:
+								<img 
+									className={theme==="dark"?"invert my-2":"my-2"}
+									src="/arrow-down.png" 
+									alt="arrow down icon" 
+									width={20} 
+									height={20}
+								/>
+							}
 						</div>
 					)
 				})}

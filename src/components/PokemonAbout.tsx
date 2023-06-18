@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { motion } from 'framer-motion';
-import { useMediaQuery } from 'react-responsive';
 
 import { useContext, useEffect } from 'react';
 import { GetPokemon } from '@/queries/GetPokemon';
@@ -20,13 +18,6 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 
 	const theme = useContext(ThemeContext);
 
-	const width = window.innerWidth;
-	const height = window.innerHeight;
-
-	const smallScreen = useMediaQuery({
-		query: '(max-width: 768px)'
-	});
-
 	const {isLoading, data, isError, error} = GetPokemon(pokemonName);
 
 	useEffect(()=>{
@@ -35,7 +26,9 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 	}, [data]);
 
 	if(isError)
-		return <div className='w-full px-4 text-center text-lg text-red-600'>An error occurred in the application.</div>
+		return <div className='w-full px-4 text-center text-[18px] lg:text-[24px] text-red-600'>
+			An error occurred while fetching this info in the application.
+		</div>
 
 	if(isLoading)
 		return (
@@ -43,37 +36,37 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				<article className='h-full px-4'>	
 	
 					<div className='flex flex-col justify-start items-start gap-2'>
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
 		
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
-						<div className="h-[12px] min-w-[100px]">
-							<Skeleton className="h-full"/>
-						</div>
-		
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
 		
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
 		
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
 		
-						<div className="h-[12px] min-w-[100px]">
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
+							<Skeleton className="h-full"/>
+						</div>
+		
+						<div className="h-[12px] lg:h-[16px] min-w-[200px] lg-min-w-[140px]">
 							<Skeleton className="h-full"/>
 						</div>
 						
 						<div className='flex flex-col justify-center items-center gap-4 mt-4 w-full'>
 						{(new Array(10)).fill(0).map((value, index)=>{
 								return(
-									<div className="h-[16px] min-w-full" key={"flavor-text-"+index}>
+									<div className="h-[14px] lg:h-[18px] min-w-full" key={"flavor-text-"+index}>
 										<Skeleton className="h-full"/>
 									</div>
 								)
@@ -92,7 +85,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 		>	
 			<div className='flex flex-col justify-start items-start'>
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -101,7 +94,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -110,7 +103,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -119,7 +112,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -128,7 +121,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -137,7 +130,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -146,7 +139,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 				</div>
 
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[12px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>
@@ -159,7 +152,7 @@ export default function PokemonAbout({pokemonName, pokemonHeight, pokemonWeight}
 					if(flavor_text.language.name==="en")
 						return(
 							<div className={clsx(
-								"text-xs text-black font-semibold",
+								"text-[14px] lg:text-[18px] text-black font-semibold",
 								theme==="dark" && "text-white"
 								)}
 								key={"flavor_text_"+index}

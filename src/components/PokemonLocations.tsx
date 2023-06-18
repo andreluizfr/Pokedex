@@ -7,6 +7,9 @@ import { useMediaQuery } from 'react-responsive';
 
 import { GetPokemon } from '@/queries/GetPokemon';
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 
 	const theme = useContext(ThemeContext);
@@ -25,6 +28,24 @@ export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 			console.log(data);
 	}, [data]);
 
+	if(isError)
+		return <div className='w-full px-4 text-center text-[18px] lg:text-[24px] text-red-600'>
+			An error occurred while fetching this info in the application.
+		</div>
+
+	if(isLoading)
+		return (
+			<SkeletonTheme baseColor="#414141" highlightColor="#626262">
+				<article className='h-full px-4'>	
+					<div className='flex flex-col justify-start items-start gap-2'>
+						<div className="h-[14px] lg:h-[16px] min-w-[80px] lg-min-w-[120px]">
+							<Skeleton className="h-full"/>
+						</div>
+					</div>
+				</article>
+			</SkeletonTheme>
+		)
+
 	return (
 		<motion.article
 			initial={smallScreen?
@@ -42,7 +63,7 @@ export default function PokemonLocations({pokemonName}: {pokemonName: string}) {
 		>
 			<div className='flex flex-col justify-start items-start'>
 				<div className={clsx(
-					"text-xs text-black font-semibold",
+					"text-[14px] lg:text-[16px] text-black font-semibold",
 					theme==="dark" && "text-white"
 					)}
 				>

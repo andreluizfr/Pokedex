@@ -9,6 +9,23 @@ import { useEffect, useState } from 'react';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCwl57LjruJjV0FEMB4TiRo7uRj33ppX3w",
+  authDomain: "pokedex-511ed.firebaseapp.com",
+  projectId: "pokedex-511ed",
+  storageBucket: "pokedex-511ed.appspot.com",
+  messagingSenderId: "640089955730",
+  appId: "1:640089955730:web:5ca87d1944acbafaed354b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.vercel.app/api/graphql',

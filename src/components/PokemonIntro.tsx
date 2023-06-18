@@ -6,13 +6,13 @@ import formatId from '@/utils/formatId';
 
 import { motion, useScroll, useSpring, useTransform} from 'framer-motion';
 
-import { IPokemonQueryData } from '@/queries/CustomGetPokemon';
+import { ICustomPokemonQueryData } from '@/queries/CustomGetPokemon';
 
 import Image from 'next/image';
 import PokemonTypeBadge from './PokemonTypeBadge';
 import PokemonAnimatedImage from './PokemonAnimatedImage';
 
-export default function PokemonIntro({data}: {data: IPokemonQueryData}) {
+export default function PokemonIntro({data}: {data: ICustomPokemonQueryData}) {
 
 	const theme = useContext(ThemeContext);
 
@@ -50,7 +50,8 @@ export default function PokemonIntro({data}: {data: IPokemonQueryData}) {
 			>	
 				<span className={clsx(
 					'Description',
-					'text-black text-xl font-bold capitalize',
+					'text-black text-[20px] font-bold capitalize',
+					'lg:text-[24px]',
 					theme === "dark" && 'text-white'
 					)}
 				>
@@ -58,7 +59,8 @@ export default function PokemonIntro({data}: {data: IPokemonQueryData}) {
 				</span>
 
 				<span className={clsx(
-					'text-black text-base font-bold',
+					'text-black text-[16px] font-bold',
+					'lg:text-[20px]',
 					theme === "dark" && 'text-white'
 					)}
 				>
